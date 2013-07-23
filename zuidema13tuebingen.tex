@@ -2,8 +2,8 @@
 
 %\include{Preamble}
 
-\documentclass[xcolor=table,handout]{beamer}
-
+\documentclass[xcolor=table]{beamer}
+%,handout
 \mode<presentation>
 {
        \usetheme{Singapore}
@@ -77,7 +77,7 @@
 \label{sec:motivation}
 
 \begin{frame}{Recursion in natural language}
-\begin{itemize}[<+>]
+\begin{itemize}[<+->]
   \item Gilligan claims that \red{Blair deceived} the
     public. 
   \item Gilligan claims that \green{Campbell helped} \red{Blair deceive} the
@@ -93,11 +93,11 @@
 \end{frame}
 
 \begin{frame}{Recursion in natural language}
-  \begin{itemize}
+  \begin{itemize}[<+->]
   \item Strong 'performance constraints' on the level of embedding;
   \item Crucial point is not infinity, but generalization
-  \item However the information is stored in the brain about how to
-    combine subjects, transitive verbs and objects (in subordinate clauses)...
+  \item However information is stored in the brain about how to
+    combine subjects, transitive verbs and objects ...
   \item ... that information can be used for all kinds of noun phrases
     and verbs
   \item ... at different levels of embedding
@@ -107,11 +107,10 @@
 \end{frame}
 
 \begin{frame}{Challenge for computational neuroscience}
-  \begin{itemize}
-  \item Rich mathematical tradition for modelling recursive structure
-    in language using (symbolic) rewriting grammars: (extended)
-    Chomsky Hierarchy;
-  \item Remain a challenge for computational neuroscience:
+  \begin{itemize}[<+->]
+  \item Although there is a rich mathematical tradition for modelling
+    recursive structure in language using symbolic grammar (Chomsky Hierarchy)...
+  \item ... it remains a challenge for computational neuroscience:
     \begin{itemize}
     \item Elman-Christiansen-Chater style neural network models fail
       to model recursion adequately (appeal to performance
@@ -138,12 +137,12 @@ Foundations of Language (2002), p65.
 \begin{frame}{Uniqueness}
   Is recursion unique for humans and unique for language?
 
-  \begin{itemize}
+  \begin{itemize}[<+->]
   \item Hauser, Chomsky, Fitch (2002): posit hypothesis that the only
     mechanism in the faculty of language that is uniquely human and
     uniquely linguistic (i.e., ``FLN'') is recursion;
   \item Pinker \& Jackendoff (2005): claim many other traits are
-    uniquely human and uniquely linguistics, while recursion is a
+    uniquely human and uniquely linguistic, while recursion is a
     property of other cognitive domains such as planning and visual
     processing;
   \item Many others claim recursion is not a real phenomenon (or at
@@ -154,7 +153,7 @@ Foundations of Language (2002), p65.
 \begin{frame}{Empirical Data}
 
 Can we design experiments to establish:
-\begin{itemize}
+\begin{itemize}[<+->]
 \item whether recursion is real (in natural language or other domains)?
 \item whether recursion is real in non-linguistic cognitive tasks?
 \item whether recursion is uniquely human or can occur in other animals?
@@ -162,7 +161,7 @@ Can we design experiments to establish:
 \end{frame}
 
 \begin{frame}{Experimental Paradigms}
-  \begin{itemize}
+  \begin{itemize}[<+->]
   \item Psycholinguistics
     \begin{itemize}
     \item E.g., Neal Johnson (1965), The Psychological Reality of
@@ -182,17 +181,62 @@ Can we design experiments to establish:
 \end{frame}
 
 \begin{frame}{Common problem}
-  \begin{itemize}
+  \begin{itemize}[<+->]
   \item Many alternative hypotheses that we need to control for
+  \item E.g., to distinguish $A^nB^n$ sequences from $(AB)^n$
+    sequences it suffices to look for:
+    \begin{enumerate}[<+->]
+    \item the bigram $AA$ (+)
+    \item the bigram $BB$ (+)
+    \item the bigram $BA$ (-)
+    \item the start $AA$ (+)
+    \item the end $BB$ (+)
+    \item the start $AB$ (-)
+    \item the end $AB$ (-)
+    \item any sequence of $A$'s followed by $B$'s ($A^nB^m$)
+    \item a mix of strategies 1-8
+    \end{enumerate}
+  \item Each of these alternative is plausible a priori, and none
+    involves context-freeness (Zuidema, 2013, CogSci)
   \end{itemize}
+\end{frame}
+
+\begin{frame}{This talk}
+  \begin{itemize}
+  \item Traditional approach to excluding alternative hypotheses, is
+    to include stimuli that are characteristic for each alternative in
+    a 'control set' of stimuli;
+  \item This approach fails when there are many alternatives.
+  \item In this talk, I explore 'model selection' as a common
+    solution. Rather than trying to get even more sophisticated about
+    the control set, I formulate alternative models and calculate a
+    goodness of fit (compare $\chi^2$) with whichever data is available.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Outline}
+\tableofcontents
 \end{frame}
 
 \section{Data}
 \label{sec:data}
 
+\subsection{the Towers of Hanoi task}
+
 \begin{frame}{Towers of Hanoi}
 \centerline{
  \includegraphics[height=.9\textheight]{towersofhanoi.png}}
+\end{frame}
+
+\begin{frame}{Simon's strategies}
+  \begin{description}[<+->]
+  \item[Goal-recursion:] To move a pyramid of size $n$ from peg $a$ to peg $b$, move a pyramid of size $n-1$ to peg $c$, ...
+  \item[Perceptual] (1) Identify the largest disk that is not on the target peg; (2) Move any movable smaller disk off the source peg; (3) ...
+  \item[Sophisticated Perceptual] (1) Identify the largest disk $d$ that is not on the target peg; (2) Identify the largest disk $d'$ obstructing $d$'s move; (3) Establish as a subgoal to move $d'$ to the remaining peg; ...
+  \item[Move-pattern:] (1) On odd-numbered moves, move the smallest disk; (2) on even-numbered moves, move the next-smallest disk that is exposed; (3) ...
+  \item[Rote learning:] Remember for every state what the optimal move is;
+  \end{description}
 \end{frame}
 
 \begin{frame}{Towers of Hanoi}
@@ -200,10 +244,48 @@ Can we design experiments to establish:
   \item Rich mathematical tradition (state space = \alert{Sierpinski triangle}, optimal solution for 4 pegs still open);
   \item Classic algorithmic problem in computer science - shortest path algorithm recursively defined (variant of \alert{Dijkstra's algorithm} - dynamic programming);
   \item Popular task in \alert{developmental psychology} for assessing \emph{executive function} (attention, planning, etc).
+    \begin{itemize}
+    \item Standard analysis in psychology is checking whether for a given item, subjects have followed the optimal path
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Towers of Hanoi}
+\subsection{the Towers of Hanoi state space}
+
+\begin{frame}{State space}
+  \begin{itemize}[<+->]
+  \item Every disk can be at each of the three pegs;
+  \item We can represent states with for each disk (from small to large) a number indicating the peg it is on.
+  \item I.e., 1133 represents a state where the smallest two disk are on the first peg, and the largest two disks on the third peg;
+  \item There are $3\times3\times3\times3=81$ states.
+  \item We can plot those states such that two states that can be reached from each other by a valid move are neighbours.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{State space}
+\scalebox{1.5}{
+  \begin{picture}(150,100)
+\qbezier(5,5)(27.5,45)(50,85)
+\qbezier(50,85)(72.5,45)(95,5)
+\qbezier(95,5)(50,5)(5,5)
+\put(0,-10){1111}
+\put(50,90){2222}
+\put(95,15){3333}
+\only<2->{\put(150,10){\vector(-2,1){100}}}
+  \end{picture}
+}
+\only<2->{\scalebox{.5}{
+  \begin{picture}(100,100)
+\qbezier(5,5)(27.5,45)(50,85)
+\qbezier(50,85)(72.5,45)(95,5)
+\qbezier(95,5)(50,5)(5,5)
+\put(0,-10){333}
+\put(50,90){222}
+\put(95,15){111}
+  \end{picture}}}
+\end{frame}
+
+\begin{frame}%{Towers of Hanoi}
 \centerline{
  \includegraphics[height=.9\textheight]{toh.png}}
 \end{frame}
@@ -215,24 +297,75 @@ Can we design experiments to establish:
 \section{Analysis}
 \label{sec:analysis}
 
+\begin{frame}{Shortest path}
+  \begin{itemize}
+  \item Standard analysis in psychology is checking whether for a given item, subjects have followed the optimal path
+  \item If they do make errors, can we use the type of errors to infer something about the strategy used?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Alternative Strategies}
+  \begin{description}[<+->]
+  \item[Random walk:] every neighbour has identical probability of being moved to;
+  \item[Optimal path (with 'performance' noise):] $p_{\mbox{optimal}}=0.9$
+  \item[Subgoal-confusion:] compute sequence of subgoals on the way to the main goal, but possibly confuse subgoals with 'similar' states.
+  \end{description}
+\end{frame}
+
+\begin{frame}{Subgoal-confusion: technicalities I}
+  \begin{itemize}[<+->]
+  \item We have a sequence of \emph{observable} moves from the subject;
+  \item The subject had a sequence of subgoals in mind - but these are \emph{hidden};
+  \item We thus have a number of possible subgoal-sequences we should consider;
+  \item We must specify the probabilities of starting with each subgoal and transitioning to the next subgoal, as well as the probabilities of making each move given the current subgoal;
+  \item Technically, this is an instance of a Hidden Markov Model, and we can compute the probability of the \emph{observed} sequence (given each possible \emph{hidden sequence and its probability}) using the Viterbi/Inside algorithm.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Subgoal-confusion: technicalities II}
+I have implemented two simple subgoal-confusion models
+  \begin{description}
+  \item[Pyramid3confusion]: The set of candidate subgoals consists of all states with a pyramid of size 3 on the optimal path, as well as those states that have the pyramid of size 3 (but not the largest peg) on the wrong peg;
+\pause
+  \item[Pyramid2confusion]: The set of candidate subgoals consists of all states with a pyramid of size 2 on the optimal path, as well as those states that have the pyramid of size 2 (but not the largest peg) on the wrong peg;
+  \end{description}
+
+\pause
+In both models, the player chooses a subgoal at random, and has a high probability ($p_{\mbox{remain}}=0.8$) of sticking to it. When the subgoal is reached, or with small probability otherwise, the player selects a different subgoal at random.
+\end{frame}
+
+\begin{frame}{Subgoal-confusion: behaviour}
+  \begin{itemize}[<+->]
+  \item These subgoal-confusion models don't model human behaviour very closely (yet);
+  \item But they share with Simon's 'perceptual strategy' the property that they predict goal-directed behavior, with a high probability of moving towards a suboptimal subgoal for a while.
+  \item If people are following a variant of the 'perceptual strategy' we should expect a much better fit with the data than with the predictions from the optimal strategy.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Results I: goodness of fit}
+\end{frame}
+
+\begin{frame}{Results II: consistency}
+\end{frame}
+
 \begin{frame}{Shortest paths}
 \centerline{
  \includegraphics[trim= 10cm 10cm 10cm 10cm,height=.9\textheight]{numbershortest.pdf}}
 \end{frame}
 
-\begin{frame}{Shortest paths}
+\begin{frame}{Random walk}
 \centerline{
- \includegraphics[trim= 10cm 10cm 10cm 10cm,height=.9\textheight]{lrandom.pdf}}
+ \includegraphics[trim= 10cm 10cm 10cm 10cm,height=.8\textheight]{lrandom.pdf}}
 \end{frame}
 
-\begin{frame}{Shortest paths}
+\begin{frame}{Optimal path}
 \centerline{
- \includegraphics[trim= 10cm 10cm 10cm 10cm,height=.9\textheight]{loptimal.pdf}}
+ \includegraphics[trim= 10cm 10cm 10cm 10cm,height=.8\textheight]{loptimal.pdf}}
 \end{frame}
 
-\begin{frame}{Shortest paths}
+\begin{frame}{Subgoal-confusion}
 \centerline{
- \includegraphics[trim= 10cm 10cm 10cm 10cm,height=.9\textheight]{lpyramid3.pdf}}
+ \includegraphics[trim= 10cm 10cm 10cm 10cm,height=.8\textheight]{lpyramid3.pdf}}
 \end{frame}
 
 
@@ -252,103 +385,6 @@ Can we design experiments to establish:
 \end{frame}
 
 
-
-\begin{frame}{Recursion}
-
-  \begin{itemize}[<+->]
-  \item Major debate in linguistics and cognitive science about
-    \begin{itemize}[<+->]
-    \item 
-    whether recursion is a fundamental property of language,
-  \item whether
-    it is a property of all human languages, and
-  \item whether it is the
-    only cognitive mechanism unique to language,
-  \item and thus the core component of an innate Universal Grammar.
-    \end{itemize}
-  \item Is there is empirical data in (child) language corpora relevant to this debate?
-  \end{itemize}
-
-\end{frame}
-
-\begin{frame}{Newspaper text}
-
-  \begin{columns}
-\column[t]{.5\textwidth}
-\Tree [.{\only<2->{\color{red}}S} [.NP Mary ] [.VP [.V knows ] [.{\only<2->{\color{red}}S} [.NP John ] [.VP [.V lies ] ]]]] 
-\column[t]{.5\textwidth}
-\begin{itemize}[<+->]
-\item Penn WSJ corpus: 30,000 sentences annotated with phrase-structure
-\item<2-> Recursion: phrases of category X embedded in a phrase of same category X
-\item<3-> Y \emph{dominates} X: a phrase of category X is embedded in a phrase of category Y
-\end{itemize}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{Dominance matrix}
-\centerline{\resizebox{1.2\linewidth}{!}{
-  \begin{tabular}[t]{l|ccccccccc}
-& \multicolumn{9}{c}{\emph{category of dominating node}}\\
- & S & VP & NP & TOP & PP & SBAR & SINV & ADJP & ADVP\\ \hline
-S & \only<2>{\y} 82439 & \only<3->{\w}84506 & \only<3->{\w}23217 & \only<3->{\w}90756 & \only<3->{\w}13475 & \only<3->{\w}41930 & \only<3->{\w}5157 & \only<3->{\w}2415 & \only<3->{\w}353\\
-VP & 255457 & \only<2>{\y} 186039 & \only<3->{\w}43154 & \only<3->{\w}132721 & \only<3->{\w}22915 & \only<3->{\w}64418 & \only<3->{\w}7546 & \only<3->{\w}4300 & \only<3->{\w}521\\
-NP & 541368 & 521562 & \only<2>{\y} 279264 & \only<3->{\w} 318194 & \only<3->{\w}201943 & \only<3->{\w}123705 & \only<3->{\w}18139 & \only<3->{\w}11418 & \only<3->{\w}4726\\
-TOP & 0 & 0 & 0 & \only<2>{\y} 0 & \only<3->{\w}0 & \only<3->{\w}0 & \only<3->{\w}0 & \only<3->{\w}0 & \only<3->{\w}0\\
-PP & 144336 & 167814 & 80558 & 86865 & \only<2>{\y} 35679 & \only<3->{\w}32068 & \only<3->{\w}4184 & \only<3->{\w}4578 & \only<3->{\w}1690\\
-SBAR & 40041 & 42621 & 15599 & 27749 & 7000 & \only<2>{\y} 6795 & \only<3->{\w}1616 & \only<3->{\w}991 & \only<3->{\w}264\\
-SINV & 265 & 182 & 31 & 1834 & 10 & 106 & \only<2>{\y} 26 & \only<3->{\w}9 & \only<3->{\w}1\\
-ADJP & 23600 & 25107 & 12813 & 13241 & 4610 & 5640 & 745 & \only<2>{\y} 1368 & \only<3->{\w}87\\
-ADVP & 35876 & 36586 & 7728 & 20385 & 5005 & 9647 & 1056 & 659 & \only<2>{\y} 629
-  \end{tabular}}}
-
-\vfill
-
-\only<4->{\alert{Category promiscuity!}}
-~
-
-\end{frame}
-
-
-  \begin{frame}{Child language (2;3-2;11)}
-\centerline{\resizebox{1.2\linewidth}{!}{    \begin{tabular}[t]{ccccccccccc}
-       &  TOP &  COMP &  XCOMP &  LOC &  CJCT &  PRED &  COM &  PTL &  OBJ2 &  SRL\\
- TOP & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
- COMP & 172 & 23 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
- XCOMP & 230 & 8 & 40 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
- LOC & 77 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
- CJCT & 10 & 3 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
- PRED & 61 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
- COM & 9 & 0 & 0 & 0 & 0 & 0 & 2 & 0 & 0 & 0\\
- PTL & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
- OBJ2 & 24 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
- SRL & 17 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1
-    \end{tabular}}}
-  \end{frame}
-
-  \begin{frame}{Child language (3;6-4;5)}
-\centerline{\resizebox{1.2\linewidth}{!}{    
-\begin{tabular}[t]{ccccccccccc}
-TOP &  COMP &  XCOMP &  PRED &  COORD &  JCT &  LOC &  CJCT &  OBJ &  SUBJ\\
-515 & 92 & 14 & 0 & 12 & 1 & 0 & 0 & 0 & 0\\
-855 & 56 & 33 & 12 & 19 & 0 & 0 & 4 & 1 & 1\\
-782 & 40 & 31 & 4 & 25 & 0 & 0 & 6 & 1 & 1\\
-423 & 7 & 30 & 7 & 23 & 12 & 0 & 3 & 26 & 2\\
-1142 & 75 & 195 & 24 & 60 & 5 & 2 & 7 & 21 & 13\\
-154 & 13 & 30 & 3 & 8 & 0 & 0 & 0 & 0 & 0\\
-88 & 11 & 8 & 1 & 1 & 0 & 0 & 0 & 0 & 0\\
-1433 & 92 & 187 & 19 & 57 & 4 & 0 & 22 & 8 & 4\\
-570 & 41 & 8 & 4 & 27 & 4 & 0 & 3 & 0 & 9
-    \end{tabular}}}
-  \end{frame}
-
-
 \end{document}
 %---------------------------------------------------------------------------------------
 
-% Opportunity to present my view on research at ILLC
-
-% Many problems in cognitive science demand collaboration between modellers and experimentalists
-% Modellers that go at it alone
-% Experimentalists that go at it alone 
-% Models need crosschecking with other models and experimental data - e.g., Gold's proof
-% ILLC is in a unique position to fulfill that role
