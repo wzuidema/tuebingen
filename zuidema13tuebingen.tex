@@ -36,6 +36,7 @@
 %\institute{}
 \date{May 3d, 2013}
 
+\newcommand{\sub}[1]{\mbox{\footnotesize #1}}
 
 \newcommand{\cred}[1]{\textcolor{dred}{#1}}
 \newcommand{\dgray}[1]{\textcolor{dgray}{#1}}
@@ -76,66 +77,97 @@
 \section{Motivation}
 \label{sec:motivation}
 
-\begin{frame}{Recursion in natural language}
-\begin{itemize}[<+->]
-  \item Gilligan claims that \red{Blair deceived} the
-    public. 
-  \item Gilligan claims that \green{Campbell helped} \red{Blair deceive} the
-    public. 
-  \item Gilligan claims that \blue{Kelly saw} \green{Campbell help} \red{Blair deceive} the
-    public. \hfill \textbf{(tail recursion)}
-  \item Gilligan behaupte dass \blue{Kelly} \green{Campbell} \red{Blair} das Publikum \red{bel\"ugen}
-    \green{helfen} \blue{sah}. \hfill~\textbf{(center~embedding)}
-  \item Gilligan beweert dat \blue{Kelly} \green{Campbell} \red{Blair} het publiek \blue{zag} \green{helpen}
-    \red{bedriegen}. \hfill \textbf{(crossing dependencies)}
-\end{itemize}
-(Huybrechts, 1984)
+\subsection{What is recursion}
+
+
+
+% \begin{frame}{Recursion in natural language}
+% \begin{itemize}[<+->]
+%   \item Gilligan claims that \red{Blair deceived} the
+%     public. 
+%   \item Gilligan claims that \green{Campbell helped} \red{Blair deceive} the
+%     public. 
+%   \item Gilligan claims that \blue{Kelly saw} \green{Campbell help} \red{Blair deceive} the
+%     public. \hfill \textbf{(tail recursion)}
+%   \item Gilligan behaupte dass \blue{Kelly} \green{Campbell} \red{Blair} das Publikum \red{bel\"ugen}
+%     \green{helfen} \blue{sah}. \hfill~\textbf{(center~embedding)}
+%   \item Gilligan beweert dat \blue{Kelly} \green{Campbell} \red{Blair} het publiek \blue{zag} \green{helpen}
+%     \red{bedriegen}. \hfill \textbf{(crossing dependencies)}
+% \end{itemize}
+% (Huybrechts, 1984)
+% \end{frame}
+
+% \begin{frame}{Recursion in natural language}
+%   \begin{itemize}[<+->]
+%   \item Strong 'performance constraints' on the level of embedding;
+%   \item Crucial point is not infinity, but generalization
+%   \item However information is stored in the brain about how to
+%     combine subjects, transitive verbs and objects ...
+%   \item ... that information can be used for all kinds of noun phrases
+%     and verbs
+%   \item ... at different levels of embedding
+%   \item ... while language users neatly distinguish its different
+%     usages in the same derivation/analysis.
+%   \end{itemize}
+% \end{frame}
+
+% \begin{frame}{Challenge for computational neuroscience}
+%   \begin{itemize}[<+->]
+%   \item Although there is a rich mathematical tradition for modelling
+%     recursive structure in language using symbolic grammar (Chomsky Hierarchy)...
+%   \item ... it remains a challenge for computational neuroscience:
+%     \begin{itemize}
+%     \item Elman-Christiansen-Chater style neural network models fail
+%       to model recursion adequately (appeal to performance
+%       constraints, but fail to demonstrate generalization);
+%     \item Hybrid symbolic-neural models show correct performance, but
+%       postulate a (symbolic) control structure with unspecified neural
+%       instantiation;
+%     \item Pollack-Whitney style fractal networks do demonstrate that
+%       recursion can be instantiated in neural tissue, but cannot (yet)
+%       account for learning;
+%     \end{itemize}
+%   \end{itemize}
+% \end{frame}
+
+% \begin{frame}
+%   "some further technical innovation is called for in neural network
+% models, which will permit them to encode typed variables and the
+% operation of instantiating them. I think that upon the development of
+% such an innovation, the dialogue between linguistic theory and neural
+% network modeling will begin to be more productive." -- Ray Jackendoff,
+% Foundations of Language (2002), p65.
+% \end{frame}
+
+\begin{frame}%{Recursion}
+\[
+\left.
+  \begin{array}[c]{r}
+    \mbox{The topic should be}\\
+    \mbox{John likes}\\
+\mbox{Peter and Mary were walking in}\\
+\mbox{This summer, the place to be is}\\
+\mbox{Sleeping on the beach on}\\
+%\mbox{John}\\
+%\mbox{John}\\
+  \end{array}
+\right\} \only<1>{\ldots}
+\only<2->{
+\left\{
+  \begin{array}[c]{l}
+    \mbox{T\"ubingen}\\
+\mbox{recursion}\\
+\mbox{the island}\\
+\only<3->{\mbox{the island in the river}}\\
+  \end{array}
+\right.
+}
+\]
 \end{frame}
 
-\begin{frame}{Recursion in natural language}
-  \begin{itemize}[<+->]
-  \item Strong 'performance constraints' on the level of embedding;
-  \item Crucial point is not infinity, but generalization
-  \item However information is stored in the brain about how to
-    combine subjects, transitive verbs and objects ...
-  \item ... that information can be used for all kinds of noun phrases
-    and verbs
-  \item ... at different levels of embedding
-  \item ... while language users neatly distinguish its different
-    usages in the same derivation/analysis.
-  \end{itemize}
-\end{frame}
 
-\begin{frame}{Challenge for computational neuroscience}
-  \begin{itemize}[<+->]
-  \item Although there is a rich mathematical tradition for modelling
-    recursive structure in language using symbolic grammar (Chomsky Hierarchy)...
-  \item ... it remains a challenge for computational neuroscience:
-    \begin{itemize}
-    \item Elman-Christiansen-Chater style neural network models fail
-      to model recursion adequately (appeal to performance
-      constraints, but fail to demonstrate generalization);
-    \item Hybrid symbolic-neural models show correct performance, but
-      postulate a (symbolic) control structure with unspecified neural
-      instantiation;
-    \item Pollack-Whitney style fractal networks do demonstrate that
-      recursion can be instantiated in neural tissue, but cannot (yet)
-      account for learning;
-    \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  "some further technical innovation is called for in neural network
-models, which will permit them to encode typed variables and the
-operation of instantiating them. I think that upon the development of
-such an innovation, the dialogue between linguistic theory and neural
-network modeling will begin to be more productive." -- Ray Jackendoff,
-Foundations of Language (2002), p65.
-\end{frame}
 
 \begin{frame}{Uniqueness}
-  Is recursion unique for humans and unique for language?
 
   \begin{itemize}[<+->]
   \item Hauser, Chomsky, Fitch (2002): posit hypothesis that the only
@@ -150,9 +182,11 @@ Foundations of Language (2002), p65.
   \end{itemize}
 \end{frame}
 
+\subsection{Empirical investigation}
+
 \begin{frame}{Empirical Data}
 
-Can we design experiments to establish:
+Given a useful operational definition of recursion, can we design experiments to establish:
 \begin{itemize}[<+->]
 \item whether recursion is real (in natural language or other domains)?
 \item whether recursion is real in non-linguistic cognitive tasks?
@@ -197,26 +231,102 @@ Can we design experiments to establish:
     \item a mix of strategies 1-8
     \end{enumerate}
   \item Each of these alternative is plausible a priori, and none
-    involves context-freeness (Zuidema, 2013, CogSci)
+    involves context-freeness
   \end{itemize}
 \end{frame}
 
-\begin{frame}{This talk}
-  \begin{itemize}
+\begin{frame}{Excluding all alternatives is hard!}
+  \begin{itemize}[<+->]
+  \item Many studies use a set of grammatical stimuli $G$ and a set of
+    non-grammatical stimuli $NG$ and show subjects treat those
+    significantly differently;
+  \item This is insufficient, as for any choice of $NG$ many plausible alternative strategies predict significant differences.
+  \item More careful studies try to exclude alternatives by considering them one-by-one.
+  \item But in all studies in the $A^nB^n$-paradigm plausible alternatives remain.
+  \item E.g., Gentner et al. report significantly lower $d'$-scores for contrasts that primacy, recency and bigram strategies predict to be strong.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Simulated data: mix of strategies}
+  \includegraphics[height=.8\textheight,clip,trim = 1.7cm 6.5cm 9.3cm 11.8cm]{mix-response-rates.pdf}
+
+\small (Zuidema, 2013, CogSci)
+\end{frame}
+
+\begin{frame}{Simulated data: $d'$ controls}
+\includegraphics[height=.8\textheight,clip,trim = 1cm 17.8cm 8.8cm 1cm]{II-dprimes-controls.pdf}
+
+\small (Zuidema, 2013, CogSci)
+\end{frame}
+
+\subsection{Model selection}
+
+\begin{frame}{Model selection}
+  \begin{itemize}[<+->]
   \item Traditional approach to excluding alternative hypotheses, is
     to include stimuli that are characteristic for each alternative in
     a 'control set' of stimuli;
   \item This approach fails when there are many alternatives.
-  \item In this talk, I explore 'model selection' as a common
-    solution. Rather than trying to get even more sophisticated about
-    the control set, I formulate alternative models and calculate a
-    goodness of fit (compare $\chi^2$) with whichever data is available.
+  \item Possible solution: 'model selection' - rather than trying to
+    get even more sophisticated about the control set, formulate
+    alternative models and calculate a goodness of
+    fit %(compare $\chi^2$)
+    with whichever data is available.
+  \item In a probabilistic paradigm, the probability of the empiricial
+    data (``likelihood'') under various alternative models is often
+    used as a criterion for model selection.
   \end{itemize}
 
 \end{frame}
 
+\begin{frame}{van Heijningen, Visser, Zuidema \& ten Cate, 2009, PNAS}
+  \begin{itemize}
+  \item Every strategy (e.g., ``bigram-AA (+)'') categorizes sequences as correct / incorrect
+  \item We assumed a small probability of error ($p_{\sub{error}}$) w.r.t. the given categorization
+  \item We estimated $p_{\sub{error}}$ from the performance on stimuli seen in the training phase
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{van Heijningen, Visser, Zuidema \& ten Cate, 2009, PNAS}
+\[
+\mbox{Likelihood}(\mbox{response}|A) = \left\{
+  \begin{array}[c]{l}
+ (1-p_{\sub{error}}) \mbox{ if response is correct}_A\\
+ p_{\sub{error}} \mbox{ if incorrect}_A
+  \end{array}
+\right.
+\]
+\pause
+\[
+Likelihood(sequence) = (1-p_{\sub{error}})^{\#correct} \times p_{\sub{error}}^{\#incorrect}
+\]
+
+\pause
+  \begin{itemize}
+  \item For 3 birds, ``AA-bigram'' was the maximum likelihood strategy
+  \item For 1 bird, ``BB-recency'' was the maximum likelihood strategy
+  \item No evidence that any bird had acquired a context-free strategy
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{This talk}
+  \begin{itemize}
+  \item In Van Heijningen et al. model selection was easy, because the
+    strategies considered were classifying stimuli simply as 'positive' or
+    'negative', and strategies were assumed to be stable over the
+    course of the experiment;
+  \item What if strategies involve more complex, internal
+    representations, that might moreover change over time?
+  \item In the remainder of the talk I focus on the technical
+    challenges we encounter when applying model selection to data from
+    a non-linguistic but ``recursive'' domain: the Towers of Hanoi
+  \end{itemize}
+\end{frame}
+
 \begin{frame}{Outline}
 \tableofcontents
+Thanks to: Mariette Huizinga (collaborator - VU Amsterdam), Marian Ortmans (data collection), Andrea Watson (data entry)
 \end{frame}
 
 \section{Data}
@@ -245,7 +355,7 @@ Can we design experiments to establish:
   \item Classic algorithmic problem in computer science - shortest path algorithm recursively defined (variant of \alert{Dijkstra's algorithm} - dynamic programming);
   \item Popular task in \alert{developmental psychology} for assessing \emph{executive function} (attention, planning, etc).
     \begin{itemize}
-    \item Standard analysis in psychology is checking whether for a given item, subjects have followed the optimal path
+    \item Standard analysis in psychology only involves checking whether for a given item, subjects have followed the optimal path
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -263,26 +373,42 @@ Can we design experiments to establish:
 \end{frame}
 
 \begin{frame}{State space}
-\scalebox{1.5}{
-  \begin{picture}(150,100)
+\centerline{
+\scalebox{1.8}{
+\small
+  \begin{picture}(110,100)
 \qbezier(5,5)(27.5,45)(50,85)
 \qbezier(50,85)(72.5,45)(95,5)
 \qbezier(95,5)(50,5)(5,5)
-\put(0,-10){1111}
-\put(50,90){2222}
-\put(95,15){3333}
-\only<2->{\put(150,10){\vector(-2,1){100}}}
+\put(0,-10){111\red{1}}
+\put(50,90){222\red{2}}
+\put(95,15){333\red{3}}
+\only<2->{\put(130,25){\vector(-2,1){80}}}
   \end{picture}
 }
-\only<2->{\scalebox{.5}{
-  \begin{picture}(100,100)
+\only<2->{\scalebox{.6}{
+\large
+  \begin{picture}(110,100)
 \qbezier(5,5)(27.5,45)(50,85)
 \qbezier(50,85)(72.5,45)(95,5)
 \qbezier(95,5)(50,5)(5,5)
-\put(0,-10){333}
-\put(50,90){222}
-\put(95,15){111}
+\put(0,-10){33\red{3}2}
+\put(50,90){22\red{2}2}
+\put(95,15){11\red{1}2}
+\only<2->{\put(130,25){\vector(-2,1){80}}}
   \end{picture}}}
+\only<3->{\scalebox{.2}{
+\Huge
+  \begin{picture}(110,100)
+\qbezier(5,5)(27.5,45)(50,85)
+\qbezier(50,85)(72.5,45)(95,5)
+\qbezier(95,5)(50,5)(5,5)
+\put(0,-20){1\red{1}22}
+\put(50,90){2\red{2}22}
+\put(95,15){3\red{3}22}
+%\only<2->{\put(130,25){\vector(-2,1){80}}}
+  \end{picture}}}
+}
 \end{frame}
 
 \begin{frame}%{Towers of Hanoi}
@@ -307,7 +433,7 @@ Can we design experiments to establish:
 \begin{frame}{Alternative Strategies}
   \begin{description}[<+->]
   \item[Random walk:] every neighbour has identical probability of being moved to;
-  \item[Optimal path (with 'performance' noise):] $p_{\mbox{optimal}}=0.9$
+  \item[Optimal path (with 'performance' noise):] $p_{\sub{optimal}}=0.9$
   \item[Subgoal-confusion:] compute sequence of subgoals on the way to the main goal, but possibly confuse subgoals with 'similar' states.
   \end{description}
 \end{frame}
@@ -331,7 +457,7 @@ I have implemented two simple subgoal-confusion models
   \end{description}
 
 \pause
-In both models, the player chooses a subgoal at random, and has a high probability ($p_{\mbox{remain}}=0.8$) of sticking to it. When the subgoal is reached, or with small probability otherwise, the player selects a different subgoal at random.
+In both models, the player chooses a subgoal at random, and has a high probability ($p_{\sub{remain}}=0.8$) of sticking to it. When the subgoal is reached, or with small probability otherwise, the player selects a different subgoal at random.
 \end{frame}
 
 \begin{frame}{Subgoal-confusion: behaviour}
@@ -343,6 +469,10 @@ In both models, the player chooses a subgoal at random, and has a high probabili
 \end{frame}
 
 \begin{frame}{Results I: goodness of fit}
+ \includegraphics[trim= 5cm 10cm 10cm 10cm,height=.9\textheight]{loglikelihoods-toh.pdf}
+
+ln(0.019)= -4
+ln(0.0025) = -6
 \end{frame}
 
 \begin{frame}{Results II: consistency}
@@ -372,6 +502,32 @@ In both models, the player chooses a subgoal at random, and has a high probabili
 \section{Conclusions}
 \label{sec:conclusions}
 
+\begin{frame}{Conclusions}
+  \begin{itemize}
+  \item The state space of the Towers of Hanoi task provides a very powerful and intuitive representation of the behavior of players of the game;
+  \item Likelihood under the optimal model already gives a more consistent measure of perfomance than the often used number-of-optimal-paths;
+  \item Models that involve optimal as well as suboptimal subgoals fit the data better than either optimal or random walk models;
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{}
+  \begin{itemize}
+  \item We can define probabilistic, 'generative' models to define
+    probability distributions over rich data, such as sequences of
+    actions or natural language;
+  \item We can use existing algorithms such as the Viterbi/Inside
+    algorithm to efficiently compute the likelihood of the data under
+    a given model;
+  \item We can use likelihood (or more complex criteria) to select the
+    best fitting model for every item, subject or population;
+  \item Ultimately, such techniques should help settle questions about
+    recursion in human language use, nonlinguistic cognitive tasks,
+    and non-human animals.
+
+  \end{itemize}
+\end{frame}
+
+
 \begin{frame}
   this analysis of the Tower of Hanoi problem may serve as a warning,
   illustrating the diversity of behavior that may be hidden under a
@@ -384,7 +540,52 @@ In both models, the player chooses a subgoal at random, and has a high probabili
   (1975, p288)
 \end{frame}
 
+\begin{frame}{Thanks!}
+  \begin{itemize}
+  \item 
+ Thanks to: Mariette Huizinga (collaborator - VU Amsterdam), Marian Ortmans (data collection), Andrea Watson (data entry)
+\item http://www.illc.uva.nl/$\sim$jzuidema
+\item zuidema@uva.nl
+  \end{itemize}
+\end{frame}
 
+\begin{frame}
+    \begin{tabular}{ccccccccccccccccccccccccccccccccc}
+ & a2b2 & a3b3 & a4b4 & ab2 & ab3 & ab4 & a1b3 & a3b1 & a2b3 &
+ a3b2 & a4 & b4 & abba & baab \\ \\
++anbn & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
++abn & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
++anbm & 1 & 1 & 1 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 \\
++aa-primacy & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 0 \\
++bb-recency & 1 & 1 & 1 & 0 & 0 & 0 & 1 & 0 & 1 & 1 & 0 & 1 &
+0 & 0 \\
++ab-recency & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 1 \\
++aa-bigram & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 1 \\
++ba-bigram & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 \\
++bb-bigram & 1 & 1 & 1 & 0 & 0 & 0 & 1 & 0 & 1 & 1 & 0 & 1 & 1 & 0 \\
++$\cdot\{1,4\}$ & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 1 & 1 \\
++$\cdot\{1,6\}$ & 1 & 1 & 0 & 1 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1
+  \end{tabular}
+
+  MIX: 25\% \textsc{+AA-primacy}, 15\% \textsc{+BB-recency}, and 10\%
+  for each of the other strategies in the table + \textsc{RANDOM}.
+
+\end{frame}
+
+\begin{frame}
+  A given mix of strategies defines for each stimulus a specific number
+$f$ of GO-responses, from a fixed number of 100 presentations. To
+generate some randomness, I assume each of the $f$ stimuli that should
+be classified as a GO-response has a fixed probability $p=0.03$ to
+receive a NOGO-response, and similarly, that each of the $100-f$
+remaining stimuli have a probability $p$ of receiving a GO-response.
+
+Hence, the final number of GO-responses is $g=x+y$, where both $x$ and
+$y$ are sampled from a binomial distribution:
+
+\[x \sim B(f,p), y \sim B(100-f,1-p)\]
+
+\end{frame}
 \end{document}
 %---------------------------------------------------------------------------------------
 
